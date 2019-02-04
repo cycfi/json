@@ -16,7 +16,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"
 endif()
 
 ###############################################################################
-# Infra
+# infra
 
 if (NOT DEFINED INTEGRE_COMMON_ROOT)
   set(INTEGRE_COMMON_ROOT ../infra)
