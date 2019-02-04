@@ -3,8 +3,8 @@
 
    Distributed under the MIT License [ https://opensource.org/licenses/MIT ]
 =============================================================================*/
-#if !defined(INFRA_DECEMBER_5_2017)
-#define INFRA_DECEMBER_5_2017
+#if !defined(JSON_DECEMBER_5_2017)
+#define JSON_DECEMBER_5_2017
 
 #include <type_traits>
 #include <utility>
@@ -25,14 +25,14 @@
 #include <boost/fusion/include/size.hpp>
 #include <boost/regex/pending/unicode_iterator.hpp>
 
-#include <infra/exception.hpp>
+//#include <infa/exception.hpp>
 
 namespace cycfi { namespace json
 {
    namespace x3 = boost::spirit::x3;
    namespace fusion = boost::fusion;
 
-   struct malformed_json_string : exception { using exception::exception; };
+   struct malformed_json_string : std::runtime_error { using runtime_error::runtime_error; }; // : exception { using exception::exception; };
 
    ////////////////////////////////////////////////////////////////////////////
    // json string class

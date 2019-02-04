@@ -6,7 +6,7 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <infra/doctest.hpp>
 
-#include <infra/json.hpp>
+#include <json/json.hpp>
 #include <boost/fusion/include/equal_to.hpp>
 #include <sstream>
 #include <iostream>

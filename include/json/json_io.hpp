@@ -3,10 +3,10 @@
 
    Distributed under the MIT License [ https://opensource.org/licenses/MIT ]
 =============================================================================*/
-#if !defined(INFRA_JSON_IO_DECEMBER_18_2017)
-#define INFRA_JSON_IO_DECEMBER_18_2017
+#if !defined(JSON_IO_DECEMBER_18_2017)
+#define JSON_IO_DECEMBER_18_2017
 
-#include <infra/json.hpp>
+#include <json/json.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/optional.hpp>

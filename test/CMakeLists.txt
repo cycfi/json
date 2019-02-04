@@ -7,7 +7,7 @@
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-project(infra_test)
+project(json_test)
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"
       OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
@@ -44,20 +44,7 @@ endif()
 ###############################################################################
 # The executable App
 
-add_executable(
-   infra_test
-   main.cpp
-)
+add_executable(json_test main.cpp)
 
-###############################################################################
-# Includes
-
-include_directories(${Boost_INCLUDE_DIR})
-
-###############################################################################
-# Libraries and linking
-
-target_link_libraries(infra_test
-   infra
-)
+target_link_libraries(json_test json infra)
 
