@@ -24,7 +24,6 @@ endif()
 
 add_subdirectory(${INTEGRE_COMMON_ROOT} "${CMAKE_CURRENT_BINARY_DIR}/infra")
 
-
 ###############################################################################
 # Boost
 

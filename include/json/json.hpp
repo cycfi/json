@@ -25,14 +25,13 @@
 #include <boost/fusion/include/size.hpp>
 #include <boost/regex/pending/unicode_iterator.hpp>
 
-//#include <infa/exception.hpp>
-
 namespace cycfi { namespace json
 {
    namespace x3 = boost::spirit::x3;
    namespace fusion = boost::fusion;
 
-   struct malformed_json_string : std::runtime_error { using runtime_error::runtime_error; }; // : exception { using exception::exception; };
+   struct malformed_json_string
+    : std::runtime_error { using runtime_error::runtime_error; };
 
    ////////////////////////////////////////////////////////////////////////////
    // json string class
