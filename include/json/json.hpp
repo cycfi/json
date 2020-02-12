@@ -200,7 +200,7 @@ namespace cycfi { namespace json
       void endl()
       {
          _out << std::endl;
-         for (int i = 0; i != _current_indent; ++i)
+         for (unsigned i = 0; i != _current_indent; ++i)
             _out << ' ';
       }
 
