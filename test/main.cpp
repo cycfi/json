@@ -7,7 +7,10 @@
 #include <infra/doctest.hpp>
 
 #include <json/json.hpp>
+#include <json/json_io.hpp>
+
 #include <boost/fusion/include/equal_to.hpp>
+
 #include <sstream>
 #include <iostream>
 
@@ -244,6 +247,23 @@ TEST_CASE("test_json_struct, test_json")
       // Just for fun!
       // std::cout << ss.str() << std::endl;
    }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// test json_io save and load
+TEST_CASE("test_json_io, test_json")
+{
+   std::vector<std::string> c = {"a", "b", "c", "d"};
+
+   std::filesystem::path tmpname(std::tmpnam(nullptr));
+   json::save(tmpname, c);
+   CHECK(std::filesystem::exists(tmpname));
+
+   auto loaded = json::load<std::vector<std::string>>(tmpname);
+   CHECK(loaded);
+   CHECK(same(c, *loaded));
+
+   std::filesystem::remove(tmpname);
 }
 
 
