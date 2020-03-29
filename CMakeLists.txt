@@ -3,9 +3,10 @@
 #
 #  Distributed under the MIT License (https://opensource.org/licenses/MIT)
 ###############################################################################
+project(cycfi::json)
 cmake_minimum_required(VERSION 3.7.2)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"
@@ -29,10 +30,10 @@ add_subdirectory(${INTEGRE_COMMON_ROOT} "${CMAKE_CURRENT_BINARY_DIR}/infra")
 
 cmake_policy(SET CMP0074 NEW)
 
-set(Boost_USE_STATIC_LIBS ON)
+set(Boost_USE_STATIC_LIBS OFF)
 find_package(
   Boost 1.61 REQUIRED
-  COMPONENTS filesystem system)
+  COMPONENTS system)
 
 include_directories(${Boost_INCLUDE_DIRS})
 
@@ -50,7 +51,6 @@ if (DEFINED BOOST_LIBRARYDIR)
    set(BOOST_CMAKE_ARGS ${BOOST_CMAKE_ARGS}
       "-DBOOST_LIBRARYDIR=${BOOST_LIBRARYDIR}")
 endif()
-
 ###############################################################################
 # json
 
