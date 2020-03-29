@@ -30,14 +30,10 @@ add_subdirectory(${INTEGRE_COMMON_ROOT} "${CMAKE_CURRENT_BINARY_DIR}/infra")
 
 cmake_policy(SET CMP0074 NEW)
 
-set(Boost_USE_STATIC_LIBS OFF)
 find_package(
   Boost 1.61 REQUIRED
-  COMPONENTS system)
-
+  )
 include_directories(${Boost_INCLUDE_DIRS})
-
-add_definitions("-DBOOST_ALL_NO_LIB") # disable auto-linking
 
 set(BOOST_CMAKE_ARGS)
 if (DEFINED BOOST_ROOT)
