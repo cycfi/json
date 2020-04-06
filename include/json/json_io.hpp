@@ -7,20 +7,18 @@
 #define JSON_IO_DECEMBER_18_2017
 
 #include <json/json.hpp>
-#include <boost/filesystem.hpp>
-#include <boost/filesystem/fstream.hpp>
-#include <boost/optional.hpp>
+#include <infra/filesystem.hpp>
+#include <optional>
+#include <fstream>
 
 namespace cycfi { namespace json
 {
-   namespace fs = boost::filesystem;
-
    template <typename T>
-   boost::optional<T> load(fs::path path)
+   std::optional<T> load(fs::path path)
    {
       if (fs::exists(path))
       {
-         fs::ifstream file(path);
+         std::ifstream file(path.string().c_str(), std::ios::binary);
          std::string src(
             (std::istreambuf_iterator<char>(file))
          , std::istreambuf_iterator<char>());
@@ -36,7 +34,7 @@ namespace cycfi { namespace json
    template <typename T>
    void save(fs::path path, T const& attr)
    {
-      fs::ofstream file(path);
+      std::ofstream file(path.string().c_str());
       std::string json;
       printer pr(file);
       pr.print(attr);

@@ -6,6 +6,10 @@
 #if !defined(JSON_DECEMBER_5_2017)
 #define JSON_DECEMBER_5_2017
 
+#if defined(_MSC_VER)
+# pragma warning(disable : 4828)
+#endif
+
 #include <type_traits>
 #include <utility>
 #include <cctype>
