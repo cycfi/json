@@ -16,15 +16,6 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"
 endif()
 
 ###############################################################################
-# infra
-
-if (NOT DEFINED INTEGRE_COMMON_ROOT)
-  set(INTEGRE_COMMON_ROOT ../infra)
-endif()
-
-add_subdirectory(${INTEGRE_COMMON_ROOT} "${CMAKE_CURRENT_BINARY_DIR}/infra")
-
-###############################################################################
 # Boost
 
 cmake_policy(SET CMP0074 NEW)
@@ -56,13 +47,12 @@ endif()
 
 add_library(json INTERFACE)
 
-target_include_directories(json INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
-
-file(GLOB_RECURSE JSON_HEADERS include/*.hpp)
-
-target_sources(infra INTERFACE ${JSON_HEADERS})
-
-target_link_libraries(json INTERFACE infra)
+target_include_directories(
+   json
+   INTERFACE
+      "${CMAKE_CURRENT_SOURCE_DIR}/include"
+      "${CMAKE_CURRENT_SOURCE_DIR}/infra/include"
+)
 
 add_subdirectory(test)
 

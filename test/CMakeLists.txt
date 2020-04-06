@@ -11,5 +11,5 @@ project(json_test)
 
 add_executable(json_test main.cpp)
 
-target_link_libraries(json_test json infra)
+target_link_libraries(json_test json)
 
