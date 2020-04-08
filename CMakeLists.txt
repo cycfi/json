@@ -3,6 +3,7 @@
 #
 #  Distributed under the MIT License (https://opensource.org/licenses/MIT)
 ###############################################################################
+project(cycfy::json)
 cmake_minimum_required(VERSION 3.7.2)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -20,10 +21,9 @@ endif()
 
 cmake_policy(SET CMP0074 NEW)
 
-set(Boost_USE_STATIC_LIBS ON)
 find_package(
   Boost 1.61 REQUIRED
-  COMPONENTS filesystem system)
+)
 
 include_directories(${Boost_INCLUDE_DIRS})
 
@@ -52,7 +52,9 @@ target_include_directories(
    INTERFACE
       "${CMAKE_CURRENT_SOURCE_DIR}/include"
       "${CMAKE_CURRENT_SOURCE_DIR}/infra/include"
+      "${CMAKE_CURRENT_SOURCE_DIR}/infra/external/filesystem/include"
 )
 
+include(CTest)
 add_subdirectory(test)
 
