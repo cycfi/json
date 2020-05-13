@@ -11,6 +11,6 @@ project(json_test)
 
 add_executable(json_test main.cpp)
 
-target_link_libraries(json_test json)
+target_link_libraries(json_test PRIVATE json)
 
 add_test(NAME json_test COMMAND json_test)

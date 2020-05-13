@@ -1,60 +1,49 @@
 ###############################################################################
-#  Copyright (c) 2016-2018 Joel de Guzman
+#  Copyright (c) 2016-2020 Joel de Guzman, Michal Urbanski
 #
 #  Distributed under the MIT License (https://opensource.org/licenses/MIT)
 ###############################################################################
-project(cycfy::json)
-cmake_minimum_required(VERSION 3.7.2)
+cmake_minimum_required(VERSION 3.12)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"
-      OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-
-   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}-ftemplate-backtrace-limit=0")
-
+if (TARGET json)
+   return()
 endif()
+
+project(json)
+
+option(JSON_BUILD_TESTS "build json library tests" ON)
 
 ###############################################################################
 # Boost
 
 cmake_policy(SET CMP0074 NEW)
 
-find_package(
-  Boost 1.61 REQUIRED
-)
-
-include_directories(${Boost_INCLUDE_DIRS})
-
-add_definitions("-DBOOST_ALL_NO_LIB") # disable auto-linking
-
-set(BOOST_CMAKE_ARGS)
-if (DEFINED BOOST_ROOT)
-   set(BOOST_CMAKE_ARGS ${BOOST_CMAKE_ARGS} "-DBOOST_ROOT=${BOOST_ROOT}")
-endif()
-if (DEFINED BOOST_INCLUDEDIR)
-   set(BOOST_CMAKE_ARGS ${BOOST_CMAKE_ARGS}
-      "-DBOOST_INCLUDEDIR=${BOOST_INCLUDEDIR}")
-endif()
-if (DEFINED BOOST_LIBRARYDIR)
-   set(BOOST_CMAKE_ARGS ${BOOST_CMAKE_ARGS}
-      "-DBOOST_LIBRARYDIR=${BOOST_LIBRARYDIR}")
-endif()
+set(Boost_USE_STATIC_LIBS ON)
+find_package(Boost 1.61 REQUIRED)
 
 ###############################################################################
 # json
 
+add_subdirectory(infra)
 add_library(json INTERFACE)
 
-target_include_directories(
-   json
-   INTERFACE
-      "${CMAKE_CURRENT_SOURCE_DIR}/include"
-      "${CMAKE_CURRENT_SOURCE_DIR}/infra/include"
-      "${CMAKE_CURRENT_SOURCE_DIR}/infra/external/filesystem/include"
+target_compile_features(json INTERFACE cxx_std_17)
+
+target_include_directories(json INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
+# disable auto-linking
+target_compile_definitions(json INTERFACE BOOST_ALL_NO_LIB)
+
+target_compile_options(json INTERFACE
+   $<$<CXX_COMPILER_ID:GNU>:-ftemplate-backtrace-limit=0>
+   $<$<CXX_COMPILER_ID:Clang>:-ftemplate-backtrace-limit=0>
 )
 
-include(CTest)
-add_subdirectory(test)
+target_link_libraries(json INTERFACE infra Boost::boost)
 
+add_library(cycfi::json ALIAS json)
+
+if (JSON_BUILD_TESTS)
+   include(CTest)
+   add_subdirectory(test)
+endif()
