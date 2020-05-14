@@ -39,7 +39,7 @@ target_compile_options(json INTERFACE
    $<$<CXX_COMPILER_ID:Clang>:-ftemplate-backtrace-limit=0>
 )
 
-target_link_libraries(json INTERFACE infra Boost::boost)
+target_link_libraries(json INTERFACE cycfi::infra Boost::boost)
 
 add_library(cycfi::json ALIAS json)
 
