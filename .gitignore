@@ -26,4 +26,6 @@ xcuserdata/
 /.vscode/
 /.idea/
 /cmake-build-debug/
-build/
+build*/
+*.cmake
+install/
