@@ -12,6 +12,6 @@ project(json_test)
 add_executable(json_test)
 target_sources(json_test PRIVATE main.cpp)
 
-target_link_libraries(json_test PRIVATE cycfi::json)
+target_link_libraries(json_test PRIVATE cycfi::infra cycfi::json)
 
 add_test(NAME json_test COMMAND json_test)
